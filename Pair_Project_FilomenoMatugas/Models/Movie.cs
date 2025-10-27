@@ -1,12 +1,15 @@
-﻿namespace Pair_Project_FilomenoMatugas.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Pair_Project_FilomenoMatugas.Models
 {
     public class Movie
     {
-        
+        [Key]
         public string MovieId { get; set; }
         public string Title { get; set; }
         public string Genre { get; set; }
-        public string Released { get; set; }
+        [DataType(DataType.Date)]
+        public DateOnly Released { get; set; }
         public string Poster { get; set; }
         public string Country { get; set; }
         public string Plot { get; set; }
