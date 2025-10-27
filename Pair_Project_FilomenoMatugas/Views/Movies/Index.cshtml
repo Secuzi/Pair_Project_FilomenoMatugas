@@ -1,84 +1,71 @@
 ﻿@model IEnumerable<Pair_Project_FilomenoMatugas.Models.Movie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movies";
 }
 
-<h1>Index</h1>
+<div class="movie-bg">
+    <div class="overlay-grain"></div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table" id="moviesTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Released)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poster)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Plot)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Votes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Released)
-            </td>
-            <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="@item.Poster">
-                    @(item.Poster?.Length > 30 ? item.Poster.Substring(0, 30) + "..." : item.Poster)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="@item.Plot">
-                    @(item.Plot?.Length > 50 ? item.Plot.Substring(0, 50) + "..." : item.Plot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Votes)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MovieId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MovieId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MovieId">Delete</a>
-            </td>
-        </tr>
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-light glow-text">🎬 Movie Collection</h1>
+            <p class="text-secondary">Explore and manage your movie library</p>
+            <a asp-action="Create" class="btn btn-outline-light btn-glow mt-2">➕ Add New Movie</a>
+        </div>
+
+        <div class="card glass-card shadow-lg border-0">
+            <div class="card-body px-4">
+                <table class="table table-dark table-hover mb-0" id="moviesTable">
+                    <thead class="bg-transparent text-uppercase small text-secondary">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Title)</th>
+                            <th>@Html.DisplayNameFor(model => model.Genre)</th>
+                            <th>@Html.DisplayNameFor(model => model.Released)</th>
+                            <th>@Html.DisplayNameFor(model => model.Poster)</th>
+                            <th>@Html.DisplayNameFor(model => model.Country)</th>
+                            <th>@Html.DisplayNameFor(model => model.Plot)</th>
+                            <th>@Html.DisplayNameFor(model => model.Rating)</th>
+                            <th>@Html.DisplayNameFor(model => model.Votes)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="movie-row">
+                                <td>@item.Title</td>
+                                <td>@item.Genre</td>
+                                <td>@item.Released</td>
+                                <td class="truncate" data-bs-toggle="tooltip" title="@item.Poster">
+                                    @(item.Poster?.Length > 30 ? item.Poster.Substring(0, 30) + "..." : item.Poster)
+                                </td>
+                                <td>@item.Country</td>
+                                <td class="truncate" data-bs-toggle="tooltip" title="@item.Plot">
+                                    @(item.Plot?.Length > 50 ? item.Plot.Substring(0, 50) + "..." : item.Plot)
+                                </td>
+                                <td>@item.Rating</td>
+                                <td>@item.Votes</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.MovieId" class="text-info text-decoration-none">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.MovieId" class="text-warning text-decoration-none">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.MovieId" class="text-danger text-decoration-none">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+        });
+    </script>
+    <script src="~/js/movies/Index.js"></script>
 }
-    </tbody>
-</table>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
-    });
-</script>
-<script src="~/js/movies/Index.js" async></script>
