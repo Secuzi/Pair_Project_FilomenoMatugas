@@ -18,17 +18,27 @@
     <header class="navbar navbar-expand-sm navbar-dark bg-transparent backdrop-blur px-lg-4">
         <div class="container-fluid">
             <a class="navbar-brand text-light fw-bold" asp-controller="Home" asp-action="Index">🎞️ MovieHub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+
+                <!-- Sign Out button aligned right -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#signOutModal">
+                            Sign Out
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -43,5 +53,27 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    
+    <div class="modal fade" id="signOutModal" tabindex="-1" aria-labelledby="signOutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light border-light">
+                <div class="modal-header border-bottom-light">
+                    <h5 class="modal-title" id="signOutModalLabel">Confirm Sign Out</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to sign out?
+                </div>
+                <div class="modal-footer border-top-light">
+                    <a class="btn btn-secondary btn-outline-light" data-bs-dismiss="modal">Cancel</a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-warning text-dark fw-bold">Sign Out</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

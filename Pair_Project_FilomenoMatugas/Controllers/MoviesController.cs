@@ -46,6 +46,7 @@ namespace Pair_Project_FilomenoMatugas.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
+            ViewBag.Country = new SelectList(_context.Country, "CountryId", "CountryName");
             return View();
         }
 
@@ -58,10 +59,12 @@ namespace Pair_Project_FilomenoMatugas.Controllers
         {
             if (ModelState.IsValid)
             {
+              
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Country = new SelectList(_context.Country, "CountryId", "CountryName", movie.CountryId);
             return View(movie);
         }
 

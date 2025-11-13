@@ -26,7 +26,7 @@ html {
     min-height: 100vh;
     background: radial-gradient(circle at center, #1b1b2f 0%, #121212 80%);
     position: relative;
-    overflow: hidden;
+  
     color: #eaeaea;
 }
 
@@ -266,4 +266,64 @@ main {
 
     .navbar-nav .nav-link:hover {
         color: #fff; /* fully bright on hover */
+    }
+
+.dataTables_length select option {
+    background-color: #37373C;
+}
+/*
+Source - https://stackoverflow.com/a
+Posted by silverwind, modified by community. See post 'Timeline' for change history
+Retrieved 2025-11-13, License - CC BY-SA 4.0
+*/
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+/* ===== Sign Out Modal Styling ===== */
+#signOutModal .modal-content {
+    background: rgba(30, 30, 50, 0.85); /* semi-transparent dark */
+    backdrop-filter: blur(16px); /* glassy blur effect */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 193, 7, 0.2); /* subtle gold accent */
+    color: #eaeaea;
+}
+
+#signOutModal .modal-header,
+#signOutModal .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+#signOutModal .modal-title {
+    color: #ffc107; /* matches links/buttons accent */
+    font-weight: 600;
+}
+
+#signOutModal .btn-close {
+    filter: invert(1); /* white close icon */
+}
+
+#signOutModal .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #eaeaea;
+    transition: all 0.3s ease;
+}
+
+    #signOutModal .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+#signOutModal .btn-warning {
+    background-color: #ffc107;
+    color: #121212;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    #signOutModal .btn-warning:hover {
+        background-color: #ffca2c;
+        box-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
     }
