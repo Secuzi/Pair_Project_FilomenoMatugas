@@ -1,0 +1,95 @@
+﻿@model Pair_Project_FilomenoMatugas.Models.User
+@{
+    Layout = "_AccountLayout";
+
+    ViewData["Title"] = "Sign Up";
+}
+<div class="position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 1055;">
+    <div id="loginToast" class="toast align-items-center text-white border-0 movie-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<div class="movie-bg d-flex align-items-center justify-content-center">
+    <div class="overlay-grain"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="glass-card p-5 position-relative shadow-lg text-center">
+                    <h2 class="mb-4 glow-text fw-bold">🎬 Create Your Account</h2>
+
+                    <form method="post" asp-action="Register" class="text-start">
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label text-light fw-semibold">Username</label>
+                            <input asp-for="Username" class="form-control bg-transparent text-light border-light" placeholder="Enter your username" required />
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label text-light fw-semibold">Password</label>
+                            <div class="input-group">
+                                <input asp-for="Password" type="password" class="form-control bg-transparent text-light border-light" placeholder="Enter your password" id="passwordInput" required />
+                                <button type="button" class="btn btn-outline-light" id="togglePassword">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+
+       
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label text-light small" for="agreeTerms">
+                                I agree to the <a href="#" class="text-warning">terms & conditions</a>
+                            </label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning text-dark fw-bold py-2 btn-glow">
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr class="border-secondary my-4">
+
+                    <p class="text-light mb-0">
+                        Already have an account?
+                        <a href="/login" class="fw-semibold text-warning">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#passwordInput");
+
+    togglePassword.addEventListener("click", function () {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Toggle eye icon
+        this.querySelector("i").classList.toggle("bi-eye");
+        this.querySelector("i").classList.toggle("bi-eye-fill");
+    });
+     document.addEventListener("DOMContentLoaded", function() {
+        @if (ViewData.ModelState.ErrorCount > 0)
+        {
+                <text>
+                var toastEl = document.getElementById('loginToast');
+                var toast = new bootstrap.Toast(toastEl, { delay: 3000 }); // 3s auto-hide
+                toast.show();
+                </text>
+        }
+    });
+</script>

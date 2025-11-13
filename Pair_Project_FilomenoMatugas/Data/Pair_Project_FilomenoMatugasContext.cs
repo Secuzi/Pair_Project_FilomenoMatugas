@@ -15,6 +15,10 @@ namespace Pair_Project_FilomenoMatugas.Data
         }
 
         public DbSet<Pair_Project_FilomenoMatugas.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<Pair_Project_FilomenoMatugas.Models.User> User { get; set; } = default!;
+        public DbSet<Pair_Project_FilomenoMatugas.Models.Favorite> Favorite { get; set; } = default!;
+        public DbSet<Pair_Project_FilomenoMatugas.Models.Country> Country { get; set; } = default!;
+
         //Seeding Purposes
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

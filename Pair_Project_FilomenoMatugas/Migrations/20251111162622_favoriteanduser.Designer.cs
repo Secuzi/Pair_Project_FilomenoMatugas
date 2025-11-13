@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pair_Project_FilomenoMatugas.Data;
 
@@ -11,9 +12,11 @@ using Pair_Project_FilomenoMatugas.Data;
 namespace Pair_Project_FilomenoMatugas.Migrations
 {
     [DbContext(typeof(Pair_Project_FilomenoMatugasContext))]
-    partial class Pair_Project_FilomenoMatugasContextModelSnapshot : ModelSnapshot
+    [Migration("20251111162622_favoriteanduser")]
+    partial class favoriteanduser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,22 +24,6 @@ namespace Pair_Project_FilomenoMatugas.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Pair_Project_FilomenoMatugas.Models.Country", b =>
-                {
-                    b.Property<int>("CountryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CountryId"));
-
-                    b.Property<string>("CountryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CountryId");
-
-                    b.ToTable("Country");
-                });
 
             modelBuilder.Entity("Pair_Project_FilomenoMatugas.Models.Favorite", b =>
                 {
@@ -63,8 +50,9 @@ namespace Pair_Project_FilomenoMatugas.Migrations
                     b.Property<string>("MovieId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -94,8 +82,6 @@ namespace Pair_Project_FilomenoMatugas.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MovieId");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Movie");
                 });
@@ -131,17 +117,6 @@ namespace Pair_Project_FilomenoMatugas.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Pair_Project_FilomenoMatugas.Models.Movie", b =>
-                {
-                    b.HasOne("Pair_Project_FilomenoMatugas.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
                 });
 #pragma warning restore 612, 618
         }
